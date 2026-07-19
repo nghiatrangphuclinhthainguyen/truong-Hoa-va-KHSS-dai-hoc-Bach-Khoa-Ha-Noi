@@ -39,6 +39,9 @@ nav{
     text-align: center;
     z-index: 1000;
 }
+.menu-btn{
+    display:none;
+}
 nav li{
     transition: .1s;
 }
@@ -363,56 +366,64 @@ section h2{
 }
 @media (max-width: 768px){
 
-    nav{
-        padding: 12px 10px;
-        display: flex;
-        overflow-x: auto;
-        white-space: nowrap;
-        gap: 20px;
-        -webkit-overflow-scrolling: touch;
-    }
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+.menu {
+    display:none;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0;
+    width:100%;
+    background:#222;
+    position:absolute;
+    top:100%;
+    left:0;
+}
+.menu-btn{
+    display:block;
+    background:none;
+    border:none;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+    margin-left:auto;
+}
+.showmenu{
+    display:flex;
+}
 
-    nav::-webkit-scrollbar{
-        display: none;
-    }
+nav li{
+    width:100%;
+}
 
-    nav a{
-        flex-shrink: 0;
-        margin: 0;
-        font-size: 15px;
-    }
-    nav ul{
-        display:flex;
-        align-items:center;
-        gap:20px;
-        list-style:none;
-    }
+nav li a{
+    display:block;
+    width:100%;
+    padding:15px 20px;
+}
 
-    nav li{
-        flex-shrink:0;
-        position:relative;
-        transition:.1s;
-    }
+.dropdown-content{
+    position:static;
+    display:none;
+    transform:none;
+    width:100%;
+    background:#333;
+    border:none;
+    box-shadow:none;
+}
 
-    nav li.open{
-        font-weight:bold;
-    }
+.dropdown.open .dropdown-content{
+    display:block;
+}
 
-    .dropdown-content{
-        position:fixed;
-        top: 55px;
-        left:50%;
-        transform:translateX(-50%);
-        min-width:220px;
-        display:none;
-        z-index:1001;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        flex-direction:column;
-    }
-
-    .dropdown.open .dropdown-content{
-        display:flex;
-    }
+.dropdown-content a{
+    color:white;
+    padding-left:40px;
+}
 
     .hero{
         padding: 90px 15px 20px;
@@ -523,9 +534,9 @@ section h2{
 </head>
 
 <body>
-
 <nav>
-    <ul>
+    <button class="menu-btn">☰</button>
+    <ul class = "menu">
         <li><a href="#hero">Trang chủ</a></li>
         <li><a href="#gioithieu">Giới thiệu</a></li>
         <li><a href="#danhsach">Danh sách anh hùng liệt sĩ</a></li>
@@ -547,7 +558,7 @@ section h2{
 </div>
 <div class="subimage">
 <div class="thumbs">
-    <img src="img1.jpg" class="thumb active">
+    <img src="img1.JPG" class="thumb active">
     <img src="img2.jpg" class="thumb">
     <img src="img3.jpg" class="thumb">
     <img src="img4.jpg" class="thumb">
@@ -651,10 +662,40 @@ section h2{
 
 <script>
     /*DROPDOWN TRÊN ĐIỆN THOẠI */
-    const dropdown = document.querySelector(".dropdown");
-    dropdown.addEventListener("click", () => {
-    dropdown.classList.toggle("open");});
 
+if (window.innerWidth <= 768) {
+
+const btn = document.querySelector(".menu-btn");
+const menu = document.querySelector(".menu");
+
+btn.addEventListener("click", (e) => {
+    e.stopPropagation();  
+    menu.classList.toggle("showmenu");
+});
+document.addEventListener("click", (event) => {
+    if (!menu.contains(event.target) && !btn.contains(event.target)) {
+        menu.classList.remove("showmenu");
+}})
+const dropdowns = document.querySelectorAll(".dropdown");
+dropdowns.forEach(dropdown => {
+    const link = dropdown.querySelector("a");
+    link.addEventListener("click", (e) => {
+        e.preventDefault(); 
+        e.stopPropagation();
+        dropdown.classList.toggle("open");
+    });
+})
+menu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        menu.classList.remove("showmenu");
+        dropdowns.forEach(dropdown => {
+            dropdown.classList.remove("open");
+        });
+
+    });
+
+});
+}
 /* HIỆN KHI SCROLL */
 const hiddenElements = document.querySelectorAll(".hidden");
 
