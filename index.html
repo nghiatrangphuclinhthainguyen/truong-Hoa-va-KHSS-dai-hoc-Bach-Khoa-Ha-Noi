@@ -664,37 +664,36 @@ nav li a{
     /*DROPDOWN TRÊN ĐIỆN THOẠI */
 
 if (window.innerWidth <= 768) {
-
-const btn = document.querySelector(".menu-btn");
-const menu = document.querySelector(".menu");
-
-btn.addEventListener("click", (e) => {
-    e.stopPropagation();  
-    menu.classList.toggle("showmenu");
-});
-document.addEventListener("click", (event) => {
-    if (!menu.contains(event.target) && !btn.contains(event.target)) {
-        menu.classList.remove("showmenu");
-}})
-const dropdowns = document.querySelectorAll(".dropdown");
-dropdowns.forEach(dropdown => {
-    const link = dropdown.querySelector("a");
-    link.addEventListener("click", (e) => {
-        e.preventDefault(); 
-        e.stopPropagation();
-        dropdown.classList.toggle("open");
+    const btn = document.querySelector(".menu-btn");
+    const menu = document.querySelector(".menu");
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation();  
+        menu.classList.toggle("showmenu");
     });
-})
-menu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-        menu.classList.remove("showmenu");
-        dropdowns.forEach(dropdown => {
-            dropdown.classList.remove("open");
+    document.addEventListener("click", (event) => {
+        if (!menu.contains(event.target) && !btn.contains(event.target)) {
+            menu.classList.remove("showmenu");
+            document.querySelectorAll(".dropdown").forEach(d => d.classList.remove("open"));
+        }
+    });
+    const dropdowns = document.querySelectorAll(".dropdown");
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector("a");
+        link.addEventListener("click", (e) => {
+            e.preventDefault(); 
+            e.stopPropagation();
+            dropdown.classList.toggle("open");
         });
-
     });
-
-});
+    const menuLinks = menu.querySelectorAll("li:not(.dropdown) > a, .dropdown-content a");
+    menuLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            menu.classList.remove("showmenu");
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove("open");
+            });
+        });
+    });
 }
 /* HIỆN KHI SCROLL */
 const hiddenElements = document.querySelectorAll(".hidden");
