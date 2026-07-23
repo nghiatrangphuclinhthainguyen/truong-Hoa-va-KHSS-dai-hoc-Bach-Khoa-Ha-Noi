@@ -21,7 +21,6 @@
         body {
             font-family: Arial, sans-serif;
         }
-
         section {
             padding: 100px 10%;
             border-top: 4px solid #d9e9ff;
@@ -207,7 +206,7 @@ text-shadow:
     top:0;
     left:-50%;
     width:18%;
-    height:150%;
+    height:200%;
     background:linear-gradient(
         90deg,
         rgba(255,255,255,0),
@@ -216,15 +215,16 @@ text-shadow:
         rgba(255,255,255,.18),
         rgba(255,255,255,0)
     );
-    animation:shine 3s linear infinite;
+    transform: skewX(-25deg);
+    animation:shine 2.5s linear infinite;
     z-index:1;
 }
 @keyframes shine{
     from{
-        transform: translateX(-120%);
+        transform: translateX(-200%) skewX(-25deg);
     }
     to{
-        transform: translateX(700%);
+        transform: translateX(1000%) skewX(-25deg);
     }
 }
 @keyframes run{
@@ -314,6 +314,7 @@ text-shadow:
 
         section h2 {
             margin-bottom: 20px;
+            text-align:center;
         }
 
         /* GALLERY */
