@@ -722,20 +722,120 @@ section h2::after {
 
         }
 
+        .map-section {
+            flex: 3; 
+            min-width: 320px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .qr-section {
+            flex: 2; 
+            min-width: 300px;
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #2f4f4f;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+/* --- LAYOUT PHẦN LIÊN HỆ & BẢN ĐỒ --- */
+        .end-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: stretch; /* Đảm bảo 2 thẻ cao bằng nhau */
+            justify-content: center;
+            width: 100%;
+        }
+
+        .map-section {
+            flex: 6; /* Cột bản đồ to hơn */
+            min-width: 320px;
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .qr-section {
+            flex: 4; /* Cột QR code */
+            min-width: 300px;
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #2f4f4f;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .qr-section p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+
+        .qr-img-wrapper {
+            background: #fff;
+            padding: 10px;
+            border: 2px dashed #a0c49d;
+            border-radius: 12px;
+            margin-top: auto;
+            margin-bottom: auto; /* Căn giữa ảnh theo chiều dọc */
+        }
+
+        .qr-section img {
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
         .map-container {
             width: 100%;
-            height: 450px;
-            margin-top: 30px;
-            overflow: hidden;
+            flex-grow: 1; /* Tự động dãn đầy chiều cao thẻ */
+            min-height: 350px;
             border-radius: 10px;
+            overflow: hidden;
         }
 
         .map-container iframe {
             width: 100%;
             height: 100%;
-            border: 0;
+            border: none;
         }
-
         /*logo */
         .thanhlogo {
             display: flex;
@@ -972,9 +1072,6 @@ figcaption::after{
         bottom: 15px;
     }
 
-            .map-container {
-                height: 300px;
-            }
 
             .hero.video-bg {
                 height: 100svh;
@@ -1140,7 +1237,19 @@ figcaption::after{
                 width: 100%;
                 max-width: 100%;
             }
-
+/* --- RESPONSIVE MOBILE LIÊN HỆ --- */
+            .end-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .map-section, .qr-section {
+                width: 100%;
+                padding: 20px 15px;
+            }
+            .map-container {
+                height: 280px;
+                min-height: 280px;
+            }
             .bang {
                 min-width: 520px;
                 width: 520px;
@@ -1343,7 +1452,7 @@ figcaption::after{
             </div>
         </section>
         <section id="hoatdongsvtn" class="hidden">
-            <h2>Các hoạt động của đội SVTN trường Hoá và KHSS</h2>
+            <h2>Các hoạt động của<br>Đội SVTN trường Hoá và KHSS</h2>
             <div class="slider">
                 <div class="mainimage">
                     <img class="mainimg" src="hd2.jpg">
@@ -1369,6 +1478,14 @@ figcaption::after{
     <section id="danhsach" class="hidden">
         <figure>
         <h2 style="text-align: center;">Danh sách anh hùng liệt sĩ</h2>
+        <p style="
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            font-style: italic;
+            line-height: 1.5;
+            text-align:center;"
+        >(Bấm vào từng mộ để xem chi tiết thông tin)</p>
         <div class="sodo-container">
 
             <img src="sodo.jpg" class="sodo">
@@ -1504,12 +1621,28 @@ figcaption::after{
     </div>
 
     <section id="lienhe" class="hidden">
-        <h2>Địa chỉ</h2>
-        <div class="map-container">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d237316.27766428364!2d105.38188934326172!3d21.66125718559081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134db5c538fa011%3A0xa27ad23176d8ee51!2zTmdoxKlhIHRyYW5nIGxp4buHdCBzxKkgeMOjIFBo4bulYyBMaW5o!5e0!3m2!1svi!2s!4v1784710362665!5m2!1svi!2s"></iframe>"
-            loading="lazy" allowfullscreen>
-            </iframe>
+        
+        <div class="end-container">
+            <!-- Cột Bản đồ -->
+            <div class="map-section">
+                <h2 class="section-title">Địa chỉ</h2>
+                <div class="map-container">
+                    <iframe
+                        src="https://maps.google.com/maps?q=21.6887726,105.5970119&hl=vi&z=17&output=embed"
+                        loading="lazy" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <div class="qr-section">
+                <h2 class="section-title">Khung cảnh 360°</h2>
+                <p>(Quét mã QR dưới đây để tham quan khuôn viên nghĩa trang)</p>
+                <div class="qr-img-wrapper">
+                    <img src="qr1.jpg" alt="Mã QR tham quan 360 độ">
+                </div>
+            </div>
+        </div>
+    </section>
+            </div>
         </div>
     </section>
 
